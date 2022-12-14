@@ -1,0 +1,149 @@
+#financeiro{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to top,#216645 ,#43b980 );
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+#financeiro.active{
+    display: flex;
+}
+
+.financial-head{
+    position: absolute;
+    width: 75%;
+    height: 10vh;
+    border-bottom: 2px solid white;
+    left: 4vh;
+    top: 10vh;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.financial-head div{
+    position: absolute;
+    left: 5vh;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18pt;
+}
+
+.btn-confirm-financial,.btn-edit-confirm{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 12pt;
+    cursor: pointer;
+}
+
+.input-saldo{
+    width: 100px;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    font-size: 20pt;
+}
+
+.displaySaldo{
+    position: absolute;
+    top: 5vh;
+    right: 400px;
+    font-size: 20pt;
+    transition: .3s;
+}
+.displaySaldo.active{
+    right: 30px;
+    transition: 1s;
+}
+
+.add-financial-reserve{
+    position: absolute;
+    left: 2vh;
+    top: 20vh;
+    width: 40vh;
+    height: 35px;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: pointer;
+}
+
+.painel-list-reserves{
+    position: absolute;
+    left: 1vh;
+    top: 25vh;
+    width: 75%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: left;
+}
+
+@media only screen and (max-width: 700px) {
+    #financeiro{
+        position: absolute;
+        flex-direction: column;
+    }
+   
+    .painel-list-reserves{
+        top: 50vh;
+        width: 95%;
+        height: 320px;
+        left: auto;
+        border: 2px solid white;
+        align-items: center;
+        overflow-y: auto;
+    }
+    .financial-head{
+        left: auto;
+        top: 24vh;
+        border: none;
+    }
+    .financial-head div{
+        position: absolute;
+        left: auto;
+        right: auto;
+        flex-direction: column;
+        background: rgb(44, 44, 44);
+        width: 100%;
+        border-radius: 12px;
+        height: 150px;
+        z-index: 1;
+    }
+    .displaySaldo{
+        right: auto;
+        top: 8vh;
+        font-size: 25pt;
+    }
+    .add-financial-reserve{
+        left: auto;
+        top: 45vh;
+        width: 100%;
+        height: 35px;
+        z-index: 1;
+    }
+    .add-financial-reserve div{
+        position: absolute;
+        width: 80%;
+        height: 35px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #icon-pay{
+        position: relative;
+        top: 0px;
+    }
+}
+

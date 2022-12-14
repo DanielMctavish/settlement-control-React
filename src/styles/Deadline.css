@@ -1,0 +1,117 @@
+/* width */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 7px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+
+
+
+#deadline-painel {
+    position: absolute;
+    top: 45vh;
+    left: 3.5vh;
+    width: 350px;
+    height: 520px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: scroll;
+}
+h3{
+    color: rgb(216, 216, 216);
+}
+
+.deadline-list-element {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    min-height: 30px;
+    color: rgb(203, 252, 255);
+}
+
+.tag-deadline {
+    position: absolute;
+    left: 4vh;
+    font-size: 15pt;
+    font-weight: 700;
+}
+
+.faixa-deadline {
+    position: absolute;
+    left: 8vh;
+    background: rgb(0, 92, 99);
+    height: 10px;
+    border-radius: 4px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.faixa-deadline-day {
+    position: relative;
+    background: white;
+    height: 10px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+#dead-line-painel-personal{
+    text-align: center;
+    width: 320px;
+    min-height: 280px;
+    border-radius: 10px;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to top,rgb(51, 127, 143),rgb(83, 191, 212));
+    color: white;
+}
+
+#dead-line-painel-pro{
+    text-align: center;
+    width: 320px;
+    min-height: 280px;
+    border-radius: 10px;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to top,rgb(199, 96, 0),rgb(238, 138, 45));
+    box-shadow: inset 2px -4px 16px rgba(53, 53, 53, 0.11);
+}
+
+.space-painel{
+    position: static;
+    width: 100%;
+    min-height: 30px;
+}
+
+@media only screen and (max-width: 700px) {
+    #deadline-painel {
+        top: 58vh;
+        left: 3.8vh;
+        transform: scale(.9);
+        margin-bottom: 2vh;
+    }
+}

@@ -1,0 +1,73 @@
+.MenuReserveAdd {
+    position: absolute;
+    width: 650px;
+    height: 250px;
+    background: rgba(0, 70, 35, 0.527);
+    backdrop-filter: blur(7px);
+    box-shadow: 4px 2px 15px rgba(0, 0, 0, 0.479);
+    border: 1px solid rgba(140, 233, 176, 0.356);
+    border-radius: 10px;
+    z-index: 1;
+
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.group-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.group-input input{
+    width: 150px;
+    min-height: 25px;
+    border-radius: 5px;
+    border: none;
+    background: rgba(46, 46, 46, 0.733);
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+.MenuReserveAdd button{
+    background: none;
+    color: white;
+    border: none;
+    font-size: 16pt;
+    cursor: pointer;
+}
+.MenuReserveAdd button:hover{
+    color: rgba(255, 255, 255, 0.801);
+}
+
+#close-btn{
+    position: absolute;
+    cursor: pointer;
+    right: 1vh;
+    top: 1vh;
+}
+
+.reserve-value {
+    width: 100px;
+}
+
+@media only screen and (max-width: 700px) {
+    .StatusAlert{
+        display: none;
+    }
+    .MenuReserveAdd {
+        width: 99%;
+        backdrop-filter: blur(2px);
+    }
+    .MenuReserveAdd div{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+    .MenuReserveAdd div input{
+        min-height: 25px;
+    }
+    #close-btn{
+        right: 5vh;
+    }
+}

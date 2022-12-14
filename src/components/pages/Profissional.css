@@ -1,0 +1,42 @@
+#profissional {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to top, #AF500A, #e68e4f);
+    color: white;
+}
+
+#profissional.active {
+    display: flex;
+}
+
+#profissionalTask {
+    position: absolute;
+    left: 5vh;
+    top: 10vh;
+    font-size: 15pt;
+    text-decoration: underline;
+    cursor: pointer;
+
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 700px){
+    .Alert-window-pro{
+        width: 90%;
+        left: auto;
+        right: auto;
+        background: #80330075;
+        backdrop-filter: blur(10px);
+        font-size: 12pt;
+    }
+}
