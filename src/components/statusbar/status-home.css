@@ -1,0 +1,16 @@
+#status-home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background: #BD5F2B;
+    bottom: 0vh;
+    width: 100%;
+    font-size: 15pt;
+}
+
+@media only screen and (max-width: 700px) {
+    #status-home{
+        font-size:11pt;
+    }
+  }

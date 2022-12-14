@@ -1,0 +1,19 @@
+.obj-item{
+    background: rgba(255, 255, 255, 0.103);
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid rgb(228, 228, 228);
+    padding: 5px;
+}
+
+.obj-item:hover{
+    background: rgba(255, 255, 255, 0.192);
+    transition: .3s;
+}
+
+.btn-obj-item{
+    position: absolute ;
+    right: 2vh;
+    cursor: pointer;
+    color: rgb(255, 89, 89);
+}

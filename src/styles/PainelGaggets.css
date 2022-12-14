@@ -1,0 +1,56 @@
+#gadgets{
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 400px;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(146, 166, 172, 0.815),rgba(202, 202, 202, 0.822));
+    box-shadow: 2px 2px 16px rgba(26, 26, 26, 0.288);
+    right: 0;
+    transition: .3s;
+}
+
+
+#gadgets.active{
+    display: flex;
+}
+
+#gadgets.active2{
+    transform: translateX(400px);
+    transition: 1s;
+}
+
+#btn-menu-deadline-icon{
+    cursor: pointer;
+    position: absolute;
+    font-size: 40pt;
+    right: 395px;
+    top: 50%;
+}
+
+#btn-menu-deadline-icon.active{
+    transform: rotate(180deg);
+    transition: .2s;
+}
+
+
+@media only screen and (max-width: 700px) {
+    #gadgets{
+        transform: translateX(390px);
+        overflow-y: scroll;
+        width: 430px;
+        z-index: 2;
+        opacity: .4;
+        backdrop-filter: blur(2px);
+    }
+    #gadgets.active2{
+        transform: translateX(60px);
+        opacity: 1;
+    }
+    #btn-menu-deadline-icon{
+        right: 385px;
+        z-index: 1;
+    }
+}

@@ -1,0 +1,91 @@
+.menu-task-add {
+    position: absolute;
+    background: rgba(44, 44, 44, 0.89);
+    backdrop-filter: blur(3px);
+    color: white;
+    border: rgba(255, 255, 255, 0.541) 1px solid;
+    width: 80%;
+    height: 350px;
+    left: 15%;
+    top: 20vh;
+    border-radius: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.menu-task-add div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 1.4vh;
+}
+
+#close-menu-icon {
+    position: absolute;
+    right: 4vh;
+    top: 2vh;
+    cursor: pointer;
+}
+
+.input-task-name {
+    width: 280px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.input-task-date {
+    width: 190px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.select-dependency {
+    width: 190px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.select-dependency-financial{
+    position: relative;
+    width: 155px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.input-value-dependency{
+    width: 80px;
+    height: 25px;
+    border-radius: 5px; 
+}
+
+.btn-confirm-newtask{
+    background: none;
+    border: none;
+    font-size: 18pt;
+    color: white;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px) {
+    #close-menu-icon {
+        margin-right: 2vh;
+    }
+    .menu-task-add {
+        width: 95%;
+        height: 75vh;
+        top: auto;
+        left: auto;
+        right: auto;
+        flex-direction: column;
+    }
+    .menu-task-add div {
+        flex-direction: column;
+    }
+    .input-task-name {
+        height: 35px;
+    }
+  }

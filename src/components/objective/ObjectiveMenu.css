@@ -1,0 +1,54 @@
+.objectivemenu{
+    position: absolute;
+    background: #FFEE56;
+    color: black;
+    width: 75%;
+    height: 80px;
+    top: 20vh;
+    border-radius: 10px;
+    font-size: 15pt;
+    display: none;
+    justify-content: space-around;
+    align-items:center;
+    z-index: 1;
+}
+
+.objectivemenu.active{
+    display: flex;
+}
+
+.input-objective{
+    width: 40%;
+    min-height: 35px;
+    border-radius: 4px;
+    border: none;
+    background: rgb(32, 32, 32) ;
+    color: white;
+}
+
+.btn-objective-add{
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background: #575757;
+    color: white;
+}
+
+.btn-objective-add:hover{
+    background: #717171;
+}
+
+@media only screen and (max-width: 700px) {
+    .objectivemenu{
+        width: 95%;
+        font-size: 14pt;
+        height: 120pt;
+        flex-direction: column;
+    }
+    .input-objective{
+        width: 80%;
+    }
+    
+}
