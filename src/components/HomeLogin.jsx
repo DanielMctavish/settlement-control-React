@@ -3,14 +3,19 @@ import { useEffect } from "react";
 import "../styles/Home.css"
 import Loginstatus from "./Loginstatus";
 import StatusBarHome from "./statusbar/StatusBarHome"
+import bg_home from '../styles/medias/pexels-boris-ulzibat-2643896.jpg'
 
 function Home(props) {
-    useEffect(()=>{console.log("renderizando nosso home!");},[props.loginStatus])
+    useEffect(() => { console.log("renderizando nosso home!"); }, [props.loginStatus])
 
     return (
         <div id="home">
-            <div id="logo">TAREFASSC</div>
-            <span className="tag-app-version">versão: 1.0.1 (build de testes)</span>
+            <img src={bg_home} alt="" id="bg-home-cover" />
+            <div id="header-home">
+                <div id="logo-home">TAREFAS SC</div>
+                <div className="tag-app-version">versão: 1.0.2 (build de testes)</div>
+            </div>
+
             <div id="ul-menu-home">
                 <li onClick={() => {
                     let menuHome = document.getElementById("home");
@@ -45,7 +50,7 @@ function Home(props) {
 
                 }}><span className="minibox-menu" style={{ background: "#FFEE56" }} ></span>Objetivos</li>
                 <li onClick={() => {
-                    
+
                     let menuHome = document.getElementById("home");
                     let financial = document.getElementById("financeiro");
                     let timer = document.getElementById("timer")
@@ -57,8 +62,8 @@ function Home(props) {
 
                 }}><span className="minibox-menu" style={{ background: "#216645" }} ></span>Financeiro</li>
             </div>
-            <StatusBarHome msg = "você não está logado, as informações não serão salvas" />
-            <Loginstatus loginStatus = {props.loginStatus}/>
+            <StatusBarHome msg="você não está logado, as informações não serão salvas" />
+            <Loginstatus loginStatus={props.loginStatus} />
         </div>
     )
 }
