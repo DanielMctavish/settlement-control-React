@@ -1,15 +1,38 @@
 import { ReservesArray } from "../AllSettlementDatabases.js";
-export let Saldo = 0;
+export let Saldo = parseFloat(localStorage.getItem('currentSaldo')) || 0;
 
 export function AddSaldo(value) {
-    if (value < 0) {
-        return value = 0;
+    // Converter para número para garantir que a operação seja matemática
+    const numValue = parseFloat(value);
+    
+    if (!isNaN(numValue)) {
+        // Adicionar o valor ao saldo (pode ser positivo ou negativo)
+        Saldo += numValue;
+        
+        // Garantir que o saldo não fique negativo
+        if (Saldo < 0) Saldo = 0;
+        
+        // Atualizar o localStorage
+        localStorage.setItem('currentSaldo', Saldo.toString());
+        
+        // Atualizar qualquer exibição do saldo na interface
+        const displaySaldo = document.querySelector(".displaySaldo");
+        if (displaySaldo) {
+            displaySaldo.textContent = `R$${Saldo.toFixed(2)}`;
+        }
+        
+        console.log("Saldo atualizado:", Saldo);
+        return true;
     }
-    return Saldo += parseFloat(value);
+    
+    console.error("Valor inválido para AddSaldo:", value);
+    return false;
 }
 
 export function ResetSaldo() {
-    return Saldo = 0;
+    Saldo = 0;
+    localStorage.setItem('currentSaldo', Saldo);
+    return true;
 }
 
 export function addNewReserve(reserveName, reserveValue) {
@@ -33,6 +56,7 @@ export function comsumeReserve(dependenciafinanceira,dependenciafinanceiravalor)
             console.log("dependencia valor",dependenciafinanceiravalor.value);
             console.log("consumindo reserva!",el);
         }
+        return null;
     })
 }
 
@@ -46,6 +70,6 @@ export function reAddValueReserve(reservename,valueReAdd){
             el.value = parseFloat(el.value) + parseFloat(valueReAdd);
             Saldo = Saldo - parseFloat(valueReAdd);
         }
+        return null;
     })
-
 }

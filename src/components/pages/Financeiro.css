@@ -1,149 +1,300 @@
-#financeiro{
+#financeiro {
     display: none;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    background: linear-gradient(to top,#216645 ,#43b980 );
+    background: linear-gradient(to bottom, #216645, #43b980);
     color: white;
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100vh;
+    overflow-y: auto;
 }
 
-#financeiro.active{
+#financeiro.active {
     display: flex;
 }
 
-.financial-head{
-    position: absolute;
-    width: 75%;
-    height: 10vh;
-    border-bottom: 2px solid white;
-    left: 4vh;
-    top: 10vh;
-
+#financeiro #logo {
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 15px;
+    letter-spacing: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+}
+
+#financeiro #logo:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#home-btn {
+    margin-right: 10px;
+}
+
+.financial-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.financial-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.saldo-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.saldo-title {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.displaySaldo {
+    font-size: 18px;
+    font-weight: 500;
+    color: #a3ffdb;
+}
+
+.financial-actions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-saldo-container {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
-.financial-head div{
-    position: absolute;
-    left: 5vh;
-    width: 60%;
+
+.add-saldo-container h3 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.add-saldo-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.input-saldo {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input-saldo:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.add-saldo-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.btn-confirm-financial, .btn-edit-confirm {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-confirm-financial {
+    background-color: #1B5365;
+    color: white;
+}
+
+.btn-confirm-financial:hover {
+    background-color: #2a7a9a;
+    transform: translateY(-2px);
+}
+
+.btn-edit-confirm {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-edit-confirm:hover {
+    background-color: #f85c4b;
+    transform: translateY(-2px);
+}
+
+.reserves-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reserves-title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+.add-financial-reserve {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 500px;
+}
+
+.add-financial-reserve:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+#icon-pay {
+    font-size: 18px;
+}
+
+.painel-list-reserves {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.reserve-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 18pt;
+    transition: all 0.3s ease;
 }
 
-.btn-confirm-financial,.btn-edit-confirm{
+.reserve-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.reserve-item-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.reserve-item-value {
+    font-size: 14px;
+    color: #a3ffdb;
+    font-weight: 500;
+}
+
+.reserve-item-delete {
     background: none;
     border: none;
     color: white;
-    font-size: 12pt;
     cursor: pointer;
-}
-
-.input-saldo{
-    width: 100px;
-    height: 30px;
-    border-radius: 7px;
-    border: none;
-    font-size: 20pt;
-}
-
-.displaySaldo{
-    position: absolute;
-    top: 5vh;
-    right: 400px;
-    font-size: 20pt;
-    transition: .3s;
-}
-.displaySaldo.active{
-    right: 30px;
-    transition: 1s;
-}
-
-.add-financial-reserve{
-    position: absolute;
-    left: 2vh;
-    top: 20vh;
-    width: 40vh;
-    height: 35px;
-    
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    cursor: pointer;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: rgba(231, 76, 60, 0.2);
+    transition: all 0.3s ease;
 }
 
-.painel-list-reserves{
-    position: absolute;
-    left: 1vh;
-    top: 25vh;
-    width: 75%;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: left;
+.reserve-item-delete:hover {
+    background-color: rgba(231, 76, 60, 0.4);
 }
 
-@media only screen and (max-width: 700px) {
-    #financeiro{
-        position: absolute;
-        flex-direction: column;
+.no-reserves-message {
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media only screen and (max-width: 768px) {
+    .financial-title {
+        font-size: 16px;
     }
-   
-    .painel-list-reserves{
-        top: 50vh;
-        width: 95%;
-        height: 320px;
-        left: auto;
-        border: 2px solid white;
-        align-items: center;
-        overflow-y: auto;
+    
+    .displaySaldo {
+        font-size: 16px;
     }
-    .financial-head{
-        left: auto;
-        top: 24vh;
-        border: none;
+    
+    .input-saldo {
+        font-size: 14px;
     }
-    .financial-head div{
-        position: absolute;
-        left: auto;
-        right: auto;
-        flex-direction: column;
-        background: rgb(44, 44, 44);
-        width: 100%;
-        border-radius: 12px;
-        height: 150px;
-        z-index: 1;
+    
+    .btn-confirm-financial, .btn-edit-confirm {
+        padding: 8px 12px;
+        font-size: 12px;
     }
-    .displaySaldo{
-        right: auto;
-        top: 8vh;
-        font-size: 25pt;
+    
+    .reserves-title {
+        font-size: 16px;
     }
-    .add-financial-reserve{
-        left: auto;
-        top: 45vh;
-        width: 100%;
-        height: 35px;
-        z-index: 1;
+    
+    .add-financial-reserve {
+        font-size: 12px;
+        padding: 8px 12px;
     }
-    .add-financial-reserve div{
-        position: absolute;
-        width: 80%;
-        height: 35px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-    #icon-pay{
-        position: relative;
-        top: 0px;
+    
+    .reserve-item-title, .reserve-item-value {
+        font-size: 12px;
     }
 }
 

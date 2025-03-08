@@ -1,45 +1,56 @@
 #timer {
     position: absolute;
+    top: 20px;
+    left: 20px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: #262626a4;
-    width: 280px;
-    height: 50px;
-    top: 0vh;
-    right: 0vh;
-    border-radius: 5px;
-    cursor: pointer;
-    padding: 5px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    transition: all 0.3s ease;
 }
 
-#timer-play {
-    position: relative;
-}
-
-#timer-pause {
-    position: relative;
-}
-
-#timer-reset {
-    position: relative;
+#timer:hover {
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .material-symbols-outlined {
-    color: white;
+    cursor: pointer;
+    margin: 0 3px;
+    transition: all 0.2s ease;
+}
+
+#timer-play, #timer-pause, #timer-reset {
+    font-size: 20px;
+}
+
+#timer-play:hover, #timer-pause:hover, #timer-reset:hover {
+    transform: scale(1.2);
+}
+
+.timerdisplay {
+    margin-left: 8px;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: default;
 }
 
 @media only screen and (max-width: 700px) {
     #timer {
-        top: 0vh;
-        color: rgb(29, 29, 29);
-        right: auto;
-        justify-content: space-around;
-        width: 100%;
-        background: rgb(0, 47, 63);
-        height: 20px;
+        top: 15px;
+        left: 15px;
+        padding: 5px 10px;
     }
-    #timer span{
-        font-size: 12pt;
+    
+    #timer-play, #timer-pause, #timer-reset {
+        font-size: 18px;
+    }
+    
+    .timerdisplay {
+        font-size: 14px;
     }
 }

@@ -1,111 +1,110 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "../../styles/Timer.css"
 
 function Timer() {
-    const [second, setSeconds] = useState(0);
-    const [secondDisplay, setSecondisplay] = useState("00")
-
-    const [min, setMin] = useState(0);
-    const [minDisplay, setmindisplay] = useState("00")
-
-    const [hour, setHour] = useState(0);
-
-    const [playtime, setPlaytime] = useState(0);
-    const [funcInterval01, setFuncInterval01] = useState("")
-
-    let seconds = second;
-    let minutes = min;
-    let hours = hour;
-
-
-
-    const timerOn = () => {
-        let iconplay = document.getElementById("timer-play");
-        iconplay.style.color = "#04f700"
-        let iconpause = document.getElementById("timer-pause");
-        iconpause.style.color = "white"
-        if (playtime === 1) {
-            return 0
-        } else {
-            setPlaytime(1)
-            const runTime = () => {
-                seconds++
-                setSeconds(seconds)
-
-                if (seconds.toString().length === 1) {
-                    setSecondisplay("0" + seconds)
-                } else {
-                    setSecondisplay(seconds)
-                }
-
-                if (seconds === 59) {
-                    seconds = -1
-                    setTimeout(() => {
-                        minutes++
-                        setMin(minutes)
-
-                        if (minutes.toString().length === 1) {
-                            setmindisplay("0" + minutes)
-                        } else {
-                            setmindisplay(minutes)
+    const [seconds, setSeconds] = useState(0);
+    const [secondsDisplay, setSecondsDisplay] = useState("00");
+    const [minutes, setMinutes] = useState(0);
+    const [minutesDisplay, setMinutesDisplay] = useState("00");
+    const [hours, setHours] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    
+    // Usando useRef para armazenar o intervalo
+    const intervalRef = useRef(null);
+    
+    // Função para formatar números com zero à esquerda
+    const formatWithLeadingZero = (num) => {
+        return num < 10 ? `0${num}` : `${num}`;
+    };
+    
+    // Efeito para atualizar os displays quando os valores mudam
+    useEffect(() => {
+        setSecondsDisplay(formatWithLeadingZero(seconds));
+    }, [seconds]);
+    
+    useEffect(() => {
+        setMinutesDisplay(formatWithLeadingZero(minutes));
+    }, [minutes]);
+    
+    // Função para iniciar o timer
+    const startTimer = () => {
+        if (isRunning) return;
+        
+        setIsRunning(true);
+        
+        intervalRef.current = setInterval(() => {
+            setSeconds(prevSeconds => {
+                if (prevSeconds === 59) {
+                    setMinutes(prevMinutes => {
+                        if (prevMinutes === 59) {
+                            setHours(prevHours => prevHours + 1);
+                            return 0;
                         }
-                    }, 1000);
+                        return prevMinutes + 1;
+                    });
+                    return 0;
                 }
-                if (minutes === 59 && seconds === 0) {
-                    minutes = -1
-                    setTimeout(() => {
-                        hours++
-                        setHour(hours)
-                    }, 1000);
-                }
+                return prevSeconds + 1;
+            });
+        }, 1000);
+    };
+    
+    // Função para pausar o timer
+    const pauseTimer = () => {
+        if (!isRunning) return;
+        
+        clearInterval(intervalRef.current);
+        setIsRunning(false);
+    };
+    
+    // Função para resetar o timer
+    const resetTimer = () => {
+        clearInterval(intervalRef.current);
+        setIsRunning(false);
+        setSeconds(0);
+        setMinutes(0);
+        setHours(0);
+    };
+    
+    // Limpar o intervalo quando o componente for desmontado
+    useEffect(() => {
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
             }
-
-            let interval01 = setInterval(runTime, 1000);
-            setFuncInterval01(interval01)
-        }
-
-    }
-    let iconplay = document.getElementById("timer-play");
-    let iconpause = document.getElementById("timer-pause");
+        };
+    }, []);
 
     return (
-        <>
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-            <div id="timer">
-                <span className="material-symbols-outlined" id="timer-play" onClick={timerOn}>timer</span>
-                <span className="material-symbols-outlined" id="timer-pause" onClick={() => {
-                    
-                    iconplay.style.color = "white"
-                    iconpause.style.color = "#ffb236"
-                    
-                    clearInterval(funcInterval01)
-                    setPlaytime(0)
-                }
-                }>pause_circle</span>
-                <span className="material-symbols-outlined" id="timer-reset" onClick={
-
-                    () => {
-                        iconplay.style.color = "white"
-                        iconpause.style.color = "white"
-
-                        clearInterval(funcInterval01)
-                        setPlaytime(0)
-                        setSeconds(0)
-                        setMin(0)
-                        setHour(0)
-                        setSecondisplay("00")
-                        setmindisplay("00")
-                    }
-
-                }>replay</span>
-                <span className="material-symbols-outlined timerdisplay">
-                    {hour}:
-                    {minDisplay}:
-                    {secondDisplay}
-                </span>
-            </div>
-        </>
-    )
+        <div id="timer">
+            <span 
+                className="material-symbols-outlined" 
+                id="timer-play" 
+                onClick={startTimer}
+                style={{ color: isRunning ? "#04f700" : "white" }}
+            >
+                timer
+            </span>
+            <span 
+                className="material-symbols-outlined" 
+                id="timer-pause" 
+                onClick={pauseTimer}
+                style={{ color: !isRunning && (seconds > 0 || minutes > 0 || hours > 0) ? "#ffb236" : "white" }}
+            >
+                pause_circle
+            </span>
+            <span 
+                className="material-symbols-outlined" 
+                id="timer-reset" 
+                onClick={resetTimer}
+            >
+                replay
+            </span>
+            <span className="material-symbols-outlined timerdisplay">
+                {formatWithLeadingZero(hours)}:{minutesDisplay}:{secondsDisplay}
+            </span>
+        </div>
+    );
 }
 
 export default Timer;

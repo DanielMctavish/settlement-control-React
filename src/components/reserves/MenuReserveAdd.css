@@ -1,73 +1,189 @@
 .MenuReserveAdd {
-    position: absolute;
-    width: 650px;
-    height: 250px;
-    background: rgba(0, 70, 35, 0.527);
-    backdrop-filter: blur(7px);
-    box-shadow: 4px 2px 15px rgba(0, 0, 0, 0.479);
-    border: 1px solid rgba(140, 233, 176, 0.356);
-    border-radius: 10px;
-    z-index: 1;
-
     display: none;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-}
-.group-input{
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
     justify-content: center;
     align-items: center;
 }
-.group-input input{
-    width: 150px;
-    min-height: 25px;
-    border-radius: 5px;
-    border: none;
-    background: rgba(46, 46, 46, 0.733);
-    color: rgb(255, 255, 255);
-    text-align: center;
-}
-.MenuReserveAdd button{
-    background: none;
-    color: white;
-    border: none;
-    font-size: 16pt;
-    cursor: pointer;
-}
-.MenuReserveAdd button:hover{
-    color: rgba(255, 255, 255, 0.801);
-}
 
-#close-btn{
+.MenuReserveAdd-overlay {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.MenuReserveAdd-content {
+    position: relative;
+    background: linear-gradient(135deg, #216645, #43b980);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.MenuReserveAdd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.MenuReserveAdd-header h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin: 0;
+}
+
+.MenuReserveAdd-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
-    right: 1vh;
-    top: 1vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
 }
 
-.reserve-value {
-    width: 100px;
+.MenuReserveAdd-close:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
 }
 
-@media only screen and (max-width: 700px) {
-    .StatusAlert{
-        display: none;
+.MenuReserveAdd-error {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: #fff;
+    padding: 10px 15px;
+    margin: 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    border-left: 3px solid #e74c3c;
+}
+
+.MenuReserveAdd-form {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.saldo-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.saldo-value {
+    font-weight: 500;
+    color: #a3ffdb;
+}
+
+.MenuReserveAdd-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.btn-cancel, .btn-confirm {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirm {
+    background-color: #1B5365;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #2a7a9a;
+}
+
+@media only screen and (max-width: 600px) {
+    .MenuReserveAdd-content {
+        width: 95%;
     }
-    .MenuReserveAdd {
-        width: 99%;
-        backdrop-filter: blur(2px);
+    
+    .MenuReserveAdd-header h2 {
+        font-size: 14px;
     }
-    .MenuReserveAdd div{
-        display: flex;
-        flex-direction: column;
-        text-align: center;
+    
+    .form-group label {
+        font-size: 12px;
     }
-    .MenuReserveAdd div input{
-        min-height: 25px;
+    
+    .form-group input {
+        padding: 8px;
+        font-size: 12px;
     }
-    #close-btn{
-        right: 5vh;
+    
+    .btn-cancel, .btn-confirm {
+        padding: 8px 12px;
+        font-size: 12px;
     }
 }

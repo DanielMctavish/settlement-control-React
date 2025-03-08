@@ -1,0 +1,89 @@
+.calculator-widget {
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 15px;
+}
+
+.calculator {
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.calculator-display {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    text-align: right;
+    font-size: 24px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.calculator-keypad {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 8px;
+}
+
+.input-keys {
+    display: grid;
+    grid-template-rows: 1fr 4fr;
+    grid-gap: 8px;
+}
+
+.function-keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 8px;
+}
+
+.digit-keys {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 8px;
+}
+
+.calculator-key {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.key-0 {
+    grid-column: 1 / span 2;
+}
+
+.operator-keys {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 8px;
+}
+
+.operator-keys .calculator-key {
+    background: rgba(255, 165, 0, 0.6);
+}
+
+.operator-keys .calculator-key.active {
+    background: rgba(255, 165, 0, 0.8);
+}
+
+.key-equals {
+    background: rgba(76, 175, 80, 0.6) !important;
+}
+
+.function-keys .calculator-key {
+    background: rgba(255, 255, 255, 0.15);
+} 

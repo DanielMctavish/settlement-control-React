@@ -1,93 +1,122 @@
-import { useState } from "react";
-import { Protaskarray, Personaltasksarray } from "../../database/AllSettlementDatabases.js";
-import { removeprotask, removeproDependency } from "../../database/data/ProTaskData.js";
-import { removeDependency } from "../../database/data/PersonalTaskData.js";
-import "../../styles/Itemtask.css"
+import { useState, useEffect } from "react";
+import "./Itemtaskpro.css";
+import { ProfessionalTasksArray, PersonalTasksArray } from "../../database/AllSettlementDatabases";
 import { DependencyAlertpro } from "../alerts/DependencyAlertpro.jsx";
 
-function Itemtaskpro(props) {
-    let randomKey = Math.floor(Math.random() * 150.152)
+function Itemtaskpro({ updateState }) {
+    const [tasks, setTasks] = useState([]);
+    const [updateRender, setUpdateRender] = useState(0);
     const [dependencyfind, setFinddependency] = useState();
     const [hostdependency, setHostdependency] = useState();
-
+    
+    // Carregar tarefas do localStorage
+    useEffect(() => {
+        const savedTasks = localStorage.getItem('professionalTasks');
+        if (savedTasks) {
+            setTasks(JSON.parse(savedTasks));
+        } else {
+            // Compatibilidade com dados antigos
+            setTasks(ProfessionalTasksArray);
+        }
+    }, [updateRender]);
+    
+    // Atualizar o componente pai quando necessário
+    useEffect(() => {
+        if (updateRender > 0) {
+            updateState();
+        }
+    }, [updateRender, updateState]);
+    
+    const handleDeleteTask = (index) => {
+        if (window.confirm("Deseja realmente excluir esta tarefa?")) {
+            const updatedTasks = [...tasks];
+            updatedTasks.splice(index, 1);
+            setTasks(updatedTasks);
+            
+            // Atualizar o array global e o localStorage
+            ProfessionalTasksArray.length = 0;
+            updatedTasks.forEach(task => ProfessionalTasksArray.push(task));
+            localStorage.setItem('professionalTasks', JSON.stringify(updatedTasks));
+            
+            setUpdateRender(prev => prev + 1);
+        }
+    };
+    
+    const handleCompleteTask = (index) => {
+        if (window.confirm("Marcar esta tarefa como concluída?")) {
+            const updatedTasks = [...tasks];
+            updatedTasks[index].completed = true;
+            setTasks(updatedTasks);
+            
+            // Atualizar o array global e o localStorage
+            ProfessionalTasksArray.length = 0;
+            updatedTasks.forEach(task => ProfessionalTasksArray.push(task));
+            localStorage.setItem('professionalTasks', JSON.stringify(updatedTasks));
+            
+            setUpdateRender(prev => prev + 1);
+        }
+    };
+    
+    // Verificar se uma tarefa tem dependência
+    const hasDependency = (task) => {
+        return task.dependency && task.dependency !== "";
+    };
+    
+    // Encontrar a tarefa dependente
+    const findDependentTask = (taskName) => {
+        // Procurar nas tarefas profissionais
+        const proTask = ProfessionalTasksArray.find(task => task.name === taskName);
+        if (proTask) return proTask;
+        
+        // Procurar nas tarefas pessoais
+        return PersonalTasksArray.find(task => task.name === taskName);
+    };
+    
     return (
-        <>
+        <div className="pro-tasks-container">
             <DependencyAlertpro dependencyfind={dependencyfind} />
-            {
-                Protaskarray.map((el, index) => {
-                    const elementPro = el;
-                    //resolvendo data-----------------------------------------
-
-                    let day_mili = (60000 * 60) * 24;
-                    let date_ini = new Date();
-                    let date_end = new Date(el.inputtaskdatepro);
-                    let time_deadline = date_end - date_ini;
-
-                    let prazo_dias_pro = Math.floor(time_deadline / day_mili) + 1;
-                    //-----------------------------------------------------------------
-                    return <div className="itemTask" key={randomKey + index}>
-                        <span className="task-tag">#{index + 1}</span>
-                        <span className="task-msg-deadline">restando {prazo_dias_pro} dias</span>
-                        <span className="task-title">
-                            {el.inputtaskname}
-
-                            <button className="btn-task-finished" onClick={() => {//excluindo da array
-
-                                if (elementPro.selectdependencypro) {
-                                    let painelalert = document.querySelector(".Alert-window-pro")
-                                    painelalert.style.display = "flex";
-
-                                    Protaskarray.map(task => {
-                                        console.log(task);
-                                        if (elementPro.selectdependencypro === task.inputtaskname) {
-                                            console.log("dependencia encontrada", task.inputtaskname);
-                                            setFinddependency(task.inputtaskname)
-                                            setHostdependency(elementPro.inputtaskname)
-                                        }
-                                        return 0;
-                                    })
-
-                                    Personaltasksarray.map(taskpersonal => {
-                                        if (elementPro.selectdependencypro === taskpersonal.inputtaskname) {
-                                            console.log("dependência pessoal encontrada: ", taskpersonal.inputtaskname);
-                                            setFinddependency(taskpersonal.inputtaskname)
-                                            setHostdependency(elementPro.inputtaskname)
-                                        }
-                                        return 0;
-                                    })
-                                }
-
-                                if (!elementPro.selectdependencypro) {
-                                    //pesquisar se esta "tarefa profissional" está setada como uma dependencia em uma tarefa pessoal.
-                                    Personaltasksarray.map(el => {
-                                        if (elementPro.inputtaskname === el.selectdependency) {
-                                            console.log("excluíndo a tarefa que estava atribuída como uma dependência pessoal")
-                                            removeDependency(elementPro.inputtaskname)
-                                        }
-                                        return 0;
-                                    })
-
-                                    if (elementPro.inputtaskname === dependencyfind) {
-                                        console.log("excluíndo a tarefa que estava atribuída como uma dependência");
-                                        removeproDependency(hostdependency);
-                                    }
-                                    removeprotask(index)
-                                    props.setChangestatepro(randomKey)
-                                }
-
-                            }}><div></div>concluir</button>
-                        </span>
-                        {el.dependenciafinanceira !== "" ? <div className="financial-ticket">
-                            R$ {el.dependenciafinanceiravalor}
-                            <span>{el.dependenciafinanceira}</span>
-                        </div> : ""}
+            {tasks.length === 0 ? (
+                <div className="no-tasks-message">
+                    Nenhuma tarefa profissional adicionada.
+                </div>
+            ) : (
+                tasks.map((task, index) => (
+                    <div 
+                        key={index} 
+                        className={`pro-task-item ${task.completed ? 'task-completed' : ''} ${hasDependency(task) ? 'task-dependency' : ''}`}
+                    >
+                        <div className="pro-task-item-info">
+                            <div className="pro-task-item-title">{task.name}</div>
+                            <div className="pro-task-item-date">
+                                {new Date(task.date).toLocaleDateString('pt-BR')}
+                                {hasDependency(task) && (
+                                    <span className="task-dependency-info">
+                                        {" - Depende de: "}{task.dependency}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                        <div className="pro-task-item-actions">
+                            {!task.completed && (
+                                <button 
+                                    className="pro-task-item-complete" 
+                                    onClick={() => handleCompleteTask(index)}
+                                >
+                                    <span className="material-symbols-outlined">check_circle</span>
+                                </button>
+                            )}
+                            <button 
+                                className="pro-task-item-delete" 
+                                onClick={() => handleDeleteTask(index)}
+                            >
+                                <span className="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
                     </div>
-                })
-            }
-        </>
-    )
-
-
+                ))
+            )}
+        </div>
+    );
 }
 
 export default Itemtaskpro;

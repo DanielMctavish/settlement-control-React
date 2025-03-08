@@ -1,23 +1,25 @@
 import { useEffect } from "react";
-import instance from "../database/Api.js";
 import "../styles/Loginstatus.css"
 
-function Loginstatus(props) {
+// Importar a senha local
+import { Pass } from "../database/data/dan.js";
+
+function Loginstatus({ setLoginStatus }) {
 
     useEffect(() => {
+        // Este componente provavelmente está importando e usando o instance do Axios
+        // Precisamos modificá-lo para não fazer requisições HTTP
+    }, [setLoginStatus])
 
-        instance.get("statuslogin").then(res => {
-            console.log("rota dos status");
-            if (res.data.authLogin) {
-                document.getElementById("icon-status-login").style.background = "green"
-                document.getElementById("name-status-login").innerHTML = res.data.user;
-            } else {
-                document.getElementById("icon-status-login").style.background = "red"
-                document.getElementById("name-status-login").innerHTML = "offline";
-            }
-        })
-
-    }, [props.loginStatus])
+    // Substituir a lógica de requisição HTTP por uma verificação local
+    const checkLogin = (username, password) => {
+        // Verificação local simples
+        if (password === Pass) {
+            setLoginStatus(true);
+            return true;
+        }
+        return false;
+    };
 
     return (
         <div id="Login-status" onClick={() => {

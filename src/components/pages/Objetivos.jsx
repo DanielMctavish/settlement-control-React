@@ -4,12 +4,11 @@ import ObjectiveMenu from "../objective/ObjectiveMenu";
 import "./Objetivos.css"
 
 function Objetivos() {
-    const[renderObjective,setRenderobj] = useState()
     return (
         <div id="objetivos">
-            <ObjectiveMenu setRenderobj = {setRenderobj}/>
+            <ObjectiveMenu />
             <div className="painel-obj-list">
-                <ObjectiveList setRenderobj = {setRenderobj}/>
+                <ObjectiveList />
             </div>
 
             <div id="logo" onClick={

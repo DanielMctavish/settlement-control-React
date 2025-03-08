@@ -1,0 +1,129 @@
+.deadline-widget {
+    background: linear-gradient(135deg, rgba(27, 83, 101, 0.8), rgba(68, 142, 167, 0.8));
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.deadline-header {
+    font-size: 16pt;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.deadline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.deadline-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.deadline-item:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.deadline-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.deadline-item-title {
+    font-size: 14pt;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deadline-item-type {
+    font-size: 10pt;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-weight: normal;
+}
+
+.deadline-item-date {
+    font-size: 12pt;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.deadline-days-remaining {
+    font-weight: 500;
+}
+
+.deadline-overdue {
+    border-left: 3px solid #e74c3c;
+}
+
+.deadline-overdue .deadline-days-remaining {
+    color: #e74c3c;
+}
+
+.deadline-today {
+    border-left: 3px solid #f39c12;
+}
+
+.deadline-today .deadline-days-remaining {
+    color: #f39c12;
+}
+
+.deadline-soon {
+    border-left: 3px solid #3498db;
+}
+
+.deadline-soon .deadline-days-remaining {
+    color: #3498db;
+}
+
+.deadline-future {
+    border-left: 3px solid #2ecc71;
+}
+
+.deadline-future .deadline-days-remaining {
+    color: #2ecc71;
+}
+
+.no-deadlines {
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    font-size: 12pt;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media only screen and (max-width: 700px) {
+    .deadline-widget {
+        max-width: 100%;
+    }
+    
+    .deadline-item-title {
+        font-size: 12pt;
+    }
+    
+    .deadline-item-date {
+        font-size: 10pt;
+    }
+} 

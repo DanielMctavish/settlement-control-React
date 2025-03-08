@@ -1,0 +1,289 @@
+.task-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.task-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.task-item.personal {
+    border-left-color: #4CAF50;
+}
+
+.task-item.professional {
+    border-left-color: #FF9800;
+}
+
+.task-item.completed {
+    opacity: 0.7;
+    border-left-color: #8BC34A;
+}
+
+.task-item.overdue {
+    border-left-color: #F44336;
+}
+
+.task-item.today {
+    border-left-color: #2196F3;
+}
+
+.task-item.soon {
+    border-left-color: #FF9800;
+}
+
+.task-checkbox {
+    padding-top: 3px;
+}
+
+.task-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.task-checkbox label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.task-checkbox input[type="checkbox"]:checked + label {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.task-checkbox input[type="checkbox"]:checked + label:after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.task-content {
+    flex: 1;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.task-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    word-break: break-word;
+}
+
+.task-header h3.completed-text {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.task-badges {
+    display: flex;
+    gap: 5px;
+}
+
+.task-badge {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.dependency-badge {
+    background: rgba(33, 150, 243, 0.3);
+    color: #90CAF9;
+}
+
+.financial-badge {
+    background: rgba(76, 175, 80, 0.3);
+    color: #A5D6A7;
+}
+
+.task-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.task-date, .task-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.task-date .material-symbols-outlined,
+.task-status .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.task-status.completed {
+    color: #8BC34A;
+}
+
+.task-status.overdue {
+    color: #F44336;
+}
+
+.task-status.today {
+    color: #2196F3;
+}
+
+.task-status.soon {
+    color: #FF9800;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.edit-button, .delete-button {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+    color: #2196F3;
+    background: rgba(33, 150, 243, 0.1);
+}
+
+.delete-button:hover {
+    color: #F44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.edit-button .material-symbols-outlined,
+.delete-button .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* Formulário de edição */
+.task-edit-form {
+    width: 100%;
+}
+
+.task-edit-form .form-group {
+    margin-bottom: 15px;
+}
+
+.task-edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.task-edit-form input[type="text"],
+.task-edit-form input[type="date"],
+.task-edit-form input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+.task-edit-form .checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.task-edit-form .checkbox-group input[type="checkbox"] {
+    margin: 0;
+}
+
+.task-edit-form .checkbox-group label {
+    margin: 0;
+}
+
+.edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cancel-edit-button, .save-edit-button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-edit-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.save-edit-button {
+    background: #4CAF50;
+    color: white;
+}
+
+/* Responsividade */
+@media only screen and (max-width: 768px) {
+    .task-item {
+        flex-direction: column;
+    }
+    
+    .task-checkbox {
+        align-self: flex-start;
+    }
+    
+    .task-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .task-actions {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .task-header {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .task-badges {
+        align-self: flex-start;
+    }
+} 

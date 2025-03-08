@@ -115,3 +115,229 @@ h3{
         margin-bottom: 2vh;
     }
 }
+
+.deadline-widget {
+    position: relative;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: white;
+    padding: 15px;
+}
+
+.deadline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.deadline-title {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.deadline-add-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.deadline-add-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.deadline-list {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.deadline-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.deadline-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.deadline-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+
+.deadline-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.deadline-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.deadline-item-title {
+    font-weight: 500;
+    color: white;
+}
+
+.deadline-item-date {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.deadline-item-progress {
+    height: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.deadline-item-progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, #4CAF50, #8BC34A);
+    border-radius: 3px;
+}
+
+.deadline-item-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.deadline-item-action {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+}
+
+.deadline-item-action:hover {
+    color: white;
+}
+
+.deadline-form {
+    padding: 15px;
+    text-align: left;
+}
+
+.deadline-form-group {
+    margin-bottom: 15px;
+}
+
+.deadline-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.deadline-form-group input,
+.deadline-form-group select {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+.deadline-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.deadline-form-cancel,
+.deadline-form-submit {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.deadline-form-cancel {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.deadline-form-submit {
+    background: #4CAF50;
+    color: white;
+}
+
+.no-deadlines-message {
+    text-align: center;
+    padding: 15px 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
+}
+
+.deadline-footer {
+    padding: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.view-all-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.view-all-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 768px) {
+    .deadline-item {
+        padding: 10px;
+    }
+    
+    .deadline-item-name {
+        font-size: 13px;
+    }
+    
+    .deadline-item-date {
+        font-size: 11px;
+    }
+    
+    .deadline-days {
+        font-size: 11px;
+    }
+    
+    .view-all-button {
+        font-size: 13px;
+        padding: 7px 12px;
+    }
+}

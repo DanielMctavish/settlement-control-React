@@ -1,65 +1,176 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../../styles/Calendar.css"
+import { PersonalTasksArray, ProfessionalTasksArray } from "../../database/AllSettlementDatabases";
+import { useToast } from "../common/ToastManager";
 
 function Calendar() {
-
-    useEffect(() => {
-        const daysTag = document.querySelector(".days"),
-            currentDate = document.querySelector(".current-date"),
-            prevNextIcon = document.querySelectorAll(".icons span");
-
-        // getting new date, current year and month
-        let date = new Date(),
-            currYear = date.getFullYear(),
-            currMonth = date.getMonth();
-
-        // storing full name of all months in array
-        const months = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho",
-            "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-
-        const renderCalendar = () => {
-            let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
-                lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
-                lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
-                lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
-            let liTag = "";
-
-            for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
-                liTag += `<li id="inactive">${lastDateofLastMonth - i + 1}</li>`;
-            }
-
-            for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
-                // adding active className to li if the current day, month, and year matched
-                let isToday = i === date.getDate() && currMonth === new Date().getMonth()
-                    && currYear === new Date().getFullYear() ? "activeday" : "";
-                liTag += `<li id ="${isToday}">${i}</li>`;
-            }
-
-            for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
-                liTag += `<li id="inactive">${i - lastDayofMonth + 1}</li>`
-            }
-            currentDate.innerHTML = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
-            daysTag.innerHTML = liTag;
-        }
-        renderCalendar();
-
-        prevNextIcon.forEach(icon => { // getting prev and next icons
-            icon.addEventListener("click", () => { // adding click event on both icons
-                // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
-                currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
-
-                if (currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
-                    // creating a new date of current year & month and pass it as date value
-                    date = new Date(currYear, currMonth);
-                    currYear = date.getFullYear(); // updating current year with new date year
-                    currMonth = date.getMonth(); // updating current month with new date month
-                } else {
-                    date = new Date(); // pass the current date as date value
-                }
-                renderCalendar(); // calling renderCalendar function
-            });
+    const [currentDate, setCurrentDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [tasksForSelectedDate, setTasksForSelectedDate] = useState([]);
+    const toast = useToast();
+    
+    // Meses em português
+    const months = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
+    
+    // Dias da semana em português
+    const weekdays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    
+    // Obter o primeiro dia do mês atual
+    const getFirstDayOfMonth = (year, month) => {
+        return new Date(year, month, 1).getDay();
+    };
+    
+    // Obter o número de dias no mês atual
+    const getDaysInMonth = (year, month) => {
+        return new Date(year, month + 1, 0).getDate();
+    };
+    
+    // Obter o número de dias no mês anterior
+    const getDaysInPreviousMonth = (year, month) => {
+        return new Date(year, month, 0).getDate();
+    };
+    
+    // Navegar para o mês anterior
+    const goToPreviousMonth = () => {
+        setCurrentDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setMonth(newDate.getMonth() - 1);
+            return newDate;
         });
-    })
+    };
+    
+    // Navegar para o próximo mês
+    const goToNextMonth = () => {
+        setCurrentDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setMonth(newDate.getMonth() + 1);
+            return newDate;
+        });
+    };
+    
+    // Verificar se uma data tem tarefas
+    const hasTasksForDate = (date) => {
+        const dateString = date.toISOString().split('T')[0];
+        
+        const personalTasks = PersonalTasksArray.filter(task => 
+            task.taskdate && task.taskdate.split('T')[0] === dateString
+        );
+        
+        const professionalTasks = ProfessionalTasksArray.filter(task => 
+            task.taskdate && task.taskdate.split('T')[0] === dateString
+        );
+        
+        return personalTasks.length > 0 || professionalTasks.length > 0;
+    };
+    
+    // Selecionar uma data e mostrar tarefas
+    const handleDateClick = (year, month, day) => {
+        const selectedDate = new Date(year, month, day);
+        setSelectedDate(selectedDate);
+        
+        const dateString = selectedDate.toISOString().split('T')[0];
+        
+        const personalTasks = PersonalTasksArray.filter(task => 
+            task.taskdate && task.taskdate.split('T')[0] === dateString
+        ).map(task => ({ ...task, type: 'personal' }));
+        
+        const professionalTasks = ProfessionalTasksArray.filter(task => 
+            task.taskdate && task.taskdate.split('T')[0] === dateString
+        ).map(task => ({ ...task, type: 'professional' }));
+        
+        const allTasks = [...personalTasks, ...professionalTasks];
+        
+        setTasksForSelectedDate(allTasks);
+        
+        if (allTasks.length > 0) {
+            toast.showInfo(`${allTasks.length} tarefa(s) para ${day} de ${months[month]} de ${year}`);
+        } else {
+            toast.showInfo(`Nenhuma tarefa para ${day} de ${months[month]} de ${year}`);
+        }
+    };
+    
+    // Renderizar o calendário
+    const renderCalendar = () => {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        const firstDayOfMonth = getFirstDayOfMonth(year, month);
+        const daysInMonth = getDaysInMonth(year, month);
+        const daysInPrevMonth = getDaysInPreviousMonth(year, month);
+        
+        const today = new Date();
+        
+        const days = [];
+        
+        // Dias do mês anterior
+        for (let i = firstDayOfMonth - 1; i >= 0; i--) {
+            const day = daysInPrevMonth - i;
+            const date = new Date(year, month - 1, day);
+            const hasEvents = hasTasksForDate(date);
+            
+            days.push(
+                <li 
+                    key={`prev-${day}`} 
+                    className="inactive"
+                    onClick={() => handleDateClick(year, month - 1, day)}
+                >
+                    {day}
+                    {hasEvents && <span className="event-dot"></span>}
+                </li>
+            );
+        }
+        
+        // Dias do mês atual
+        for (let day = 1; day <= daysInMonth; day++) {
+            const date = new Date(year, month, day);
+            const isToday = day === today.getDate() && 
+                            month === today.getMonth() && 
+                            year === today.getFullYear();
+            
+            const isSelected = selectedDate && 
+                              day === selectedDate.getDate() && 
+                              month === selectedDate.getMonth() && 
+                              year === selectedDate.getFullYear();
+            
+            const hasEvents = hasTasksForDate(date);
+            
+            days.push(
+                <li 
+                    key={`current-${day}`} 
+                    className={`${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}`}
+                    onClick={() => handleDateClick(year, month, day)}
+                >
+                    {day}
+                    {hasEvents && <span className="event-dot"></span>}
+                </li>
+            );
+        }
+        
+        // Dias do próximo mês
+        const totalDaysDisplayed = days.length;
+        const remainingCells = 42 - totalDaysDisplayed; // 6 linhas x 7 dias = 42 células
+        
+        for (let day = 1; day <= remainingCells; day++) {
+            const date = new Date(year, month + 1, day);
+            const hasEvents = hasTasksForDate(date);
+            
+            days.push(
+                <li 
+                    key={`next-${day}`} 
+                    className="inactive"
+                    onClick={() => handleDateClick(year, month + 1, day)}
+                >
+                    {day}
+                    {hasEvents && <span className="event-dot"></span>}
+                </li>
+            );
+        }
+        
+        return days;
+    };
     
     return (
         <>
@@ -69,25 +180,37 @@ function Calendar() {
                 <header>
                     <p className="current-date"></p>
                     <div className="icons">
-                        <span className="material-symbols-outlined" id="prev">chevron_left</span>
-                        <span className="material-symbols-outlined" id="next">chevron_right</span>
+                        <span className="material-symbols-outlined" id="prev" onClick={goToPreviousMonth}>chevron_left</span>
+                        <span className="material-symbols-outlined" id="next" onClick={goToNextMonth}>chevron_right</span>
                     </div>
                 </header>
                 <div className="calendar">
                     <ul className="weeks">
-                        <li>Dom</li>
-                        <li>Seg</li>
-                        <li>Ter</li>
-                        <li>Qua</li>
-                        <li>Qui</li>
-                        <li>Sex</li>
-                        <li>Sab</li>
+                        {weekdays.map(day => <li key={day}>{day}</li>)}
                     </ul>
                     <ul className="days">
-
+                        {renderCalendar()}
                     </ul>
                 </div>
             </div>
+            {selectedDate && tasksForSelectedDate.length > 0 && (
+                <div className="calendar-tasks">
+                    <h3>
+                        Tarefas para {selectedDate.getDate()} de {months[selectedDate.getMonth()]}
+                    </h3>
+                    <ul className="task-list">
+                        {tasksForSelectedDate.map((task, index) => (
+                            <li 
+                                key={index} 
+                                className={`task-item ${task.type === 'personal' ? 'personal' : 'professional'}`}
+                            >
+                                <span className="task-name">{task.taskname}</span>
+                                {task.completed && <span className="task-completed-badge">Concluída</span>}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </>
     )
 }

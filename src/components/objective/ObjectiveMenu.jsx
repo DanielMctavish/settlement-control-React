@@ -1,5 +1,4 @@
 import "../objective/ObjectiveMenu.css"
-import { ObjectivesArray } from "../../database/AllSettlementDatabases.js";
 import { AddObjective } from "../../database/data/ObjectivesData.js";
 
 function ObjectiveMenu(props){

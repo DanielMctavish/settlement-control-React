@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Gerenciador de Tarefas e Finanças Pessoais  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## 📋 Sobre o Projeto  
+O **Gerenciador de Tarefas e Finanças Pessoais** é uma aplicação web moderna desenvolvida para ajudar os usuários a organizar suas tarefas diárias e gerenciar suas finanças de forma eficiente. Com uma interface intuitiva e responsiva, o aplicativo permite que você mantenha o controle de suas atividades pessoais e profissionais, além de acompanhar seus gastos e economias.  
 
-In the project directory, you can run:
+## ✨ Funcionalidades Principais  
 
-### `npm start`
+### 📌 Gerenciamento de Tarefas  
+- **Tarefas Pessoais:** Organize suas atividades do dia a dia  
+- **Tarefas Profissionais:** Mantenha o controle de suas responsabilidades de trabalho  
+- **Filtros:** Visualize tarefas por status (pendentes, concluídas, todas)  
+- **Prazos:** Acompanhe os prazos de suas tarefas com indicadores visuais  
+- **Dependências:** Defina dependências entre tarefas, incluindo dependências financeiras  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 💰 Gerenciamento Financeiro  
+- **Controle de Saldo:** Acompanhe seu saldo atual  
+- **Reservas Financeiras:** Crie e gerencie reservas para diferentes objetivos  
+- **Vinculação com Tarefas:** Associe despesas a tarefas específicas  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🧩 Widgets e Ferramentas  
+- **Relógio Digital:** Visualize a hora atual  
+- **Calendário:** Veja suas tarefas organizadas por data  
+- **Pomodoro Timer:** Aumente sua produtividade com a técnica Pomodoro  
+- **Clima:** Confira a previsão do tempo para sua localidade  
+- **Notas Rápidas:** Faça anotações rápidas sem sair da aplicação  
+- **Calculadora:** Realize cálculos simples diretamente na interface  
 
-### `npm test`
+## 🎨 Design e Interface  
+A aplicação apresenta um design moderno e intuitivo, com:  
+- **Temas por Contexto:** Cores diferentes para áreas pessoais e profissionais  
+- **Interface Responsiva:** Adaptação perfeita para dispositivos móveis e desktop  
+- **Painel de Gadgets:** Acesso rápido a ferramentas úteis  
+- **Notificações:** Sistema de toast para feedback de ações  
+- **Animações Suaves:** Transições que melhoram a experiência do usuário  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔧 Tecnologias Utilizadas  
+- **React:** Biblioteca JavaScript para construção de interfaces  
+- **CSS3:** Estilização avançada com animações e layouts flexíveis  
+- **LocalStorage:** Armazenamento persistente de dados no navegador  
+- **Material Symbols:** Ícones modernos para melhorar a experiência visual  
 
-### `npm run build`
+## 📱 Responsividade  
+A aplicação foi desenvolvida com foco em responsividade, garantindo uma experiência consistente em:  
+- **Desktops e Laptops:** Layout otimizado para telas grandes  
+- **Tablets:** Adaptação para telas médias  
+- **Smartphones:** Interface totalmente funcional em dispositivos móveis  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Como Começar  
+1. Acesse a página inicial  
+2. Navegue entre as seções **Pessoal**, **Profissional** e **Financeiro**  
+3. Adicione suas primeiras tarefas  
+4. Configure suas reservas financeiras  
+5. Explore os widgets disponíveis no painel lateral  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔮 Próximas Atualizações  
+- Sincronização com calendários externos  
+- Modo escuro  
+- Estatísticas e relatórios de produtividade  
+- Notificações por e-mail e push  
+- Aplicativo móvel nativo  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---  
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 👨‍💻 Desenvolvido por  
+**Daniel McTavish**  
